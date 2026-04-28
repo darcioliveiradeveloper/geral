@@ -1,0 +1,1 @@
+console.log("Versão 4 avançada com recursos extras (use código completo fornecido anteriormente).");

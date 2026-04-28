@@ -1,0 +1,17 @@
+{
+  "name": "darci",
+  "version": "1.0.0",
+  "main": "calculadora.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon calculadora.js"
+  },
+  "keywords": [],
+  "author": "Darci",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.1.14",
+    "prompt-sync": "^4.2.0"
+  },
+  "description": ""
+}
