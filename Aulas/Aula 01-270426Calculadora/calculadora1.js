@@ -1,32 +1,29 @@
-// Importa o módulo 'readline' para ler dados do terminal (standard input)
 const readline = require("readline");
 
-// Cria a interface de leitura e escrita para interagir com o usuário
 const rl = readline.createInterface({
-  input: process.stdin, // Entrada de dados (o que você digita)
-  output: process.stdout, // Saída de dados (o que o programa exibe)
+  input: process.stdin,
+  output: process.stdout,
 });
 
-// Função principal que organiza as perguntas
 function iniciarCalculadora() {
-  console.log("=== CALCULADORA NODE.JS ===\n");
+  console.log("=== CALCULADORA NODE.JS COM TRATAMENTO DE ERROS ===\n");
 
-  // Pergunta 1: Primeiro número
   rl.question("Digite o primeiro número: ", (valor1) => {
-    // Pergunta 2: Operação
-    rl.question("Escolha a operação (+, -, *, /): ", (operacao) => {
-      // Pergunta 3: Segundo número
+    rl.question("Escolha a operação (+, -, *, /, %): ", (operacao) => {
       rl.question("Digite o segundo número: ", (valor2) => {
-        // Converte as entradas de string para números decimais
+        
+        // Convertendo as strings recebidas para números
         const num1 = parseFloat(valor1);
         const num2 = parseFloat(valor2);
         let resultado;
 
-        // Validação: Verifica se as entradas são números válidos
-        if (isNaN(num1) || isNaN(num2)) {
-          console.log("\n[ERRO]: Você deve inserir números válidos!");
+        // --- TRATAMENTO DE ERROS COM TYPEOF ---
+        // Verificamos se a conversão resultou em um tipo 'number' 
+        // e se não é um NaN (Not a Number)
+        if (typeof num1 !== 'number' || isNaN(num1) || typeof num2 !== 'number' || isNaN(num2)) {
+          console.log("\n[ERRO]: Entrada inválida. Verifique se digitou apenas números.");
         } else {
-          // Lógica de cálculo baseada no símbolo da operação
+          
           switch (operacao) {
             case "+":
               resultado = num1 + num2;
@@ -38,29 +35,29 @@ function iniciarCalculadora() {
               resultado = num1 * num2;
               break;
             case "/":
-              // Validação: Impede a divisão por zero
-              if (num2 !== 0) {
-                resultado = num1 / num2;
-              } else {
-                resultado = "Erro: Divisão por zero!";
-              }
+              resultado = num2 !== 0 ? num1 / num2 : "Erro: Divisão por zero!";
+              break;
+            case "%":
+              resultado = (num1 / 100) * num2;
               break;
             default:
               resultado = "Operação inválida!";
           }
 
-          // Exibe o resultado final no terminal
-          console.log(
-            `\n> Resultado: ${num1} ${operacao} ${num2} = ${resultado}`,
-          );
+          // Validação secundária do resultado usando typeof
+          // Se o resultado for uma string (como a mensagem de erro da divisão por zero),
+          // o typeof nos ajuda a formatar a saída de forma diferente.
+          if (typeof resultado === "string") {
+            console.log(`\n> Atenção: ${resultado}`);
+          } else if (typeof resultado === "number") {
+            console.log(`\n> Resultado Final: ${resultado.toFixed(2)}`);
+          }
         }
 
-        // Fecha a interface do terminal para o programa encerrar
         rl.close();
       });
     });
   });
 }
 
-// Executa a função
 iniciarCalculadora();
