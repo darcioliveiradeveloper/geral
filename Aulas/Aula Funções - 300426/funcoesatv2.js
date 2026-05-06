@@ -13,10 +13,10 @@ function ePrimo(n) {
 
     // Criamos um laço que começa em 2 e vai até a raiz quadrada de 'n'
     // Isso é eficiente porque um número não pode ser dividido por um fator maior que sua raiz quadrada sem ter um fator correspondente menor que ela
-    for (let i = 2; i <= Math.sqrt(n); i++) {
+    for (let i = 2; i <= Math.sqrt(n); i++) { // Iniciamos o laço em 2, pois 1 é um divisor trivial e não conta para a definição de número primo
         
         // Verificamos se 'n' é divisível por 'i'
-        if (n % i === 0) {
+        if (n % i === 0) { // Se 'n' for divisível por 'i', então 'n' não é primo
             return false; // Se for divisível, então 'n' não é primo, retornamos falso
         }
     }
