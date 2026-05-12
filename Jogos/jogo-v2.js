@@ -18,5 +18,5 @@ function jogar() {
         }
     });
 }
-
 jogar();
+

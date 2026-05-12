@@ -65,3 +65,4 @@ function iniciarCalculadora() { // Define a função principal da calculadora.
 
 iniciarCalculadora(); // Executa o programa.
 
+
